@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="#0d0d16"/>
+  <!-- Film strip top holes -->
+  <rect x="3.5" y="3" width="4.5" height="3.5" rx="1.2" fill="#8b5cf6"/>
+  <rect x="13.75" y="3" width="4.5" height="3.5" rx="1.2" fill="#8b5cf6"/>
+  <rect x="24" y="3" width="4.5" height="3.5" rx="1.2" fill="#8b5cf6"/>
+  <!-- Film strip bottom holes -->
+  <rect x="3.5" y="25.5" width="4.5" height="3.5" rx="1.2" fill="#8b5cf6"/>
+  <rect x="13.75" y="25.5" width="4.5" height="3.5" rx="1.2" fill="#8b5cf6"/>
+  <rect x="24" y="25.5" width="4.5" height="3.5" rx="1.2" fill="#8b5cf6"/>
+  <!-- Side bars -->
+  <rect x="2" y="8" width="2.5" height="16" rx="1" fill="#8b5cf6" opacity="0.35"/>
+  <rect x="27.5" y="8" width="2.5" height="16" rx="1" fill="#8b5cf6" opacity="0.35"/>
+  <!-- Play triangle -->
+  <path d="M11 9.5 L23 16 L11 22.5 Z" fill="white"/>
+</svg>

@@ -1,0 +1,45 @@
+{
+  "name": "@movie-tracker/api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "echo 'no build needed'",
+    "start": "tsx src/index.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "tsx src/seed.ts",
+    "ai:embeddings": "tsx src/scripts/generateEmbeddings.ts",
+    "ai:reset-embeddings": "tsx src/scripts/resetEmbeddings.ts",
+    "db:expand": "tsx src/scripts/expandContent.ts",
+    "db:fix-posters": "tsx src/scripts/fixPosters.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@hono/node-server": "^2.0.1",
+    "@neondatabase/serverless": "^1.1.0",
+    "@types/nodemailer": "^8.0.0",
+    "better-auth": "^1.6.9",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "hono": "^4.12.16",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^8.0.7",
+    "postgres": "^3.4.9",
+    "tsx": "^4.21.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.2",
+    "@types/node-cron": "^3.0.11",
+    "drizzle-kit": "^0.31.10",
+    "typescript": "~6.0.3"
+  }
+}

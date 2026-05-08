@@ -1,0 +1,14 @@
+{
+  "name": "movie-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:api": "pnpm --filter @movie-tracker/api dev",
+    "dev:web": "pnpm --filter @movie-tracker/web dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.33.2"
+}
