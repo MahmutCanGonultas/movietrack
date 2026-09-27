@@ -4,7 +4,13 @@ import { embedText } from '@/lib/gemini';
 import { isNull, eq } from 'drizzle-orm';
 import { GENRES } from '@/routes/content';
 
-export async function generateMissingEmbeddings(limit?: number): Promise<number> {
+/**
+ * Embeds titles that have no vector yet. With a `deadline` (a Date.now()
+ * timestamp) the run stops before it, and on a quota error it stops instead of
+ * waiting a minute: a serverless function would be cut off either way, and the
+ * next run picks up whatever is left.
+ */
+export async function generateMissingEmbeddings(limit?: number, deadline?: number): Promise<number> {
   const baseQuery = db
     .select({ id: content.id, title: content.title, overview: content.overview, type: content.type, genreIds: content.genreIds })
     .from(content)
@@ -20,6 +26,10 @@ export async function generateMissingEmbeddings(limit?: number): Promise<number>
 
   let done = 0;
   for (const item of items) {
+    if (deadline && Date.now() > deadline) {
+      console.log(`[embed] Süre doldu, kalanlar bir sonraki çalıştırmada.`);
+      break;
+    }
     const genreNames = ((item.genreIds as number[]) ?? [])
       .map((id) => GENRES[id])
       .filter(Boolean)
@@ -41,6 +51,10 @@ export async function generateMissingEmbeddings(limit?: number): Promise<number>
         break;
       } catch (e: any) {
         const is429 = e.message?.includes('429') || e.message?.includes('quota');
+        if (is429 && deadline) {
+          console.log(`[embed] Gemini kotası doldu; ${done} embedding oluşturuldu, kalanlar bir sonraki çalıştırmada.`);
+          return done;
+        }
         if (is429 && retries < 4) {
           retries++;
           await new Promise((r) => setTimeout(r, 65_000));
