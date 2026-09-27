@@ -5,10 +5,15 @@
   "main": "index.js",
   "scripts": {
     "dev:api": "pnpm --filter @movie-tracker/api dev",
-    "dev:web": "pnpm --filter @movie-tracker/web dev"
+    "dev:web": "pnpm --filter @movie-tracker/web dev",
+    "build:vercel": "node scripts/build-vercel.mjs",
+    "deploy:vercel": "node scripts/build-vercel.mjs && vercel deploy --prebuilt --prod"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.33.2"
+  "packageManager": "pnpm@10.33.2",
+  "devDependencies": {
+    "esbuild": "^0.25.12"
+  }
 }

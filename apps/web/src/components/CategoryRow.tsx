@@ -38,6 +38,7 @@ export function CategoryRow({ title, genreId, type, limit = 14, newest = false }
       if (newest) params.set('sort', 'newest');
       else if (genreId) params.set('sort', 'random');
       const res = await fetch(`/api/content?${params}`);
+      if (!res.ok) throw new Error(`content ${res.status}`);
       return res.json();
     },
     staleTime: 1000 * 60 * 10,
@@ -78,7 +79,8 @@ export function CategoryRow({ title, genreId, type, limit = 14, newest = false }
   }
 
   if (isLoading) return <RowSkeleton title={title} />;
-  if (!data?.data.length) return null;
+  // An error body has no `data`; `data?.data.length` used to throw and blank the page.
+  if (!data?.data?.length) return null;
 
   const [featured, ...rest] = data.data;
 
